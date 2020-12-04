@@ -12,7 +12,7 @@ const app = express()
 
 // Ambientes
 const isProduction = process.env.NODE_ENV === 'production'
-const PORT = process.env.PORT === 3000
+const PORT = process.env.PORT || 3000
 
 // Arquivos estáticos
 app.use("/public", express.static(__dirname + "/public"))
@@ -37,7 +37,7 @@ app.use(bodyParser.urlencoded({ extended: false, limit: 1.5*1024*1024 }));
 app.use(bodyParser.json({ limit: 1.5*1024*1024 }))
 
 // Models
-require('./models');
+require('./models/usuario');
 // Rotas
 app.use('/', require('./routes'));
 
