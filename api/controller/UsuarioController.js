@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Usuario = mongoose.model('Usuario');
-const enviarEmailRecovery = require('../helpers/email-recovery');
-const usuario = require('../models/usuario');
+//const enviarEmailRecovery = require('../helpers/email-recovery');
+//const usuario = require('../models/usuario');
 
 class UsuarioController {
   // GET /
@@ -128,3 +128,5 @@ class UsuarioController {
     })
   }
 }
+
+module.exports = UsuarioController;
