@@ -30,15 +30,15 @@ class UsuarioController {
 
   // POST /register
   store(req, res, next) {
-    const { nome, email, password } = req.body;
+    const { nome, email, password, loja } = req.body;
 
-    if(!nome || !email || !password) return res.status(422).json({ errors: "Preencha todos os campos de cadastro." });
+    if(!nome || !email || !password || !loja) return res.status(422).json({ errors: "Preencha todos os campos de cadastro." });
 
-    const usuario = new Usuario({ nome, email });
+    const usuario = new Usuario({ nome, email, loja }); 
     usuario.setSenha(password);
 
     usuario.save()
-      .then(() => res.json({ usuario: usuario.enviarAuthJSON() }))
+      .then(() => res.json({ usuario: usuario.enviarAuthJSON() })) 
       .catch(next)
   }
 
