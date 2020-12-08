@@ -1,4 +1,4 @@
-const mongoose = require("mongoose"),
+/*const mongoose = require("mongoose"),
       Schema= mongoose.Schema;
 const uniqueValidator = require('mongoose-unique-validator');
 const crypto = require("crypto");
@@ -88,8 +88,8 @@ UsuarioSchema.methods.finalizarTokenRecuperacaoSenha = function(){
 };
 
 module.exports = mongoose.model("Usuario", UsuarioSchema);
-
-/*const mongoose = require('mongoose'),
+*/
+const mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
 const uniqueValidator = require('mongoose-unique-validator');
@@ -181,4 +181,4 @@ UsuarioSchema.methods.finalizarTokenRecuperacaoSenha = function() {
   return this.recovery;
 }
 
-module.exports = mongoose.model("Usuario", UsuarioSchema)*/
+module.exports = mongoose.model("Usuario", UsuarioSchema)
