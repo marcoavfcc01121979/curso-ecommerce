@@ -9,12 +9,12 @@ router.post('/registrar', usuarioController.store); // testado
 router.put('/', auth.required, usuarioController.update); // testado
 router.delete('/', auth.required, usuarioController.remove); // testado
 
-router.get('/recuperar-senha', usuarioController.showRecovery);
-router.post('/recuperar-senha', usuarioController.createRecovery);
-router.get('/senha-recuperada', usuarioController.showCompleteRecovery);
-router.post('/senha-recuperado', usuarioController.completeRecovery);
+router.get('/recuperar-senha', usuarioController.showRecovery); //testado
+router.post('/recuperar-senha', usuarioController.createRecovery); //testado
+router.get('/senha-recuperada', usuarioController.showCompleteRecovery); //testado
+router.post('/senha-recuperada', usuarioController.completeRecovery); //testado
 
 router.get('/', auth.required, usuarioController.index); // testado
 router.get('/:id', auth.required, usuarioController.show); // testado
-
+ 
 module.exports = router;
