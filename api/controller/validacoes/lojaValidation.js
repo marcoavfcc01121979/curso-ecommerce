@@ -9,7 +9,7 @@ module.exports = (req, res, next) => {
   Usuario.findById(req.payload.id).then(usuario => {
     if(!usuario) return res.sendStatus(401);
     if(!usuario.loja) return res.sendStatus(401);
-    if(!usuario.permissao.include("admin")) return res.sendStatus(401);
+    if(!usuario.permissao.includes("admin")) return res.sendStatus(401);
     if(usuario.loja.toString() !== loja) return res.sendStatus(401);
     next()
   }).catch(next);
