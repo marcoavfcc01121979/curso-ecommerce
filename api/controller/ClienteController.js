@@ -15,7 +15,7 @@ class ClienteController{
       const limit = Number(req.query.limit) || 30;
       const clientes = await Cliente.paginate(
         { loja: req.query.loja },
-        { offset, limit, populate: "usuario" }
+        { offset, limit, populate: {path: 'usuario', select: "-salt -hash"} }
       );
       return res.send({ clientes });
     } catch(e) {
@@ -36,7 +36,7 @@ class ClienteController{
     try{
       const clientes = await Cliente.paginate(
         { loja: req.query.loja, nome: { $regex: search } },
-        { offset, limit, populate: "usuario" }
+        { offset, limit, populate: {path: 'usuario', select: "-salt -hash"} }
       );
       return res.send({ clientes });
     } catch(e) {
@@ -47,7 +47,7 @@ class ClienteController{
   // GET /admin/:id
   async showAdmin(req, res, next) {
     try {
-      const cliente = await (await Cliente.findOne({ _id: req.params.id, loja: req.query.loja })).populate("usuario");
+      const cliente = await (await Cliente.findOne({ _id: req.params.id, loja: req.query.loja })).populate({path: 'usuario', select: "-salt -hash"});
       return res.send({ cliente });
     } catch(e) {
       next(e)
@@ -64,7 +64,7 @@ class ClienteController{
     const { nome, cpf, email, telefones, endereco, dataDeNascimento } = req.body;
 
     try{
-      const cliente = await Cliente.findById(req.params.id).populate('usuario');
+      const cliente = await Cliente.findById(req.params.id).populate({path: 'usuario', select: "-salt -hash"});
       if(nome) {
         cliente.usuario.nome = nome;
         cliente.nome = nome;
@@ -88,7 +88,7 @@ class ClienteController{
  // GET /:id
  async show(req, res, next) {
    try{
-    const clientes = await Cliente.findOne({ usuario: req.payload.id, loja: req.query.loja }).populate('usuario');
+    const clientes = await Cliente.findOne({ usuario: req.payload.id, loja: req.query.loja }).populate({path: 'usuario', select: "-salt -hash"});
     return res.send({ clientes });
    } catch(e) {
      next(e)
@@ -117,8 +117,8 @@ class ClienteController{
  async update(req, res, next) {
   const { nome, email, cpf, telefones, endereco, dataDeNascimento, password } = req.body;
   try{
-    const cliente = await Cliente.findById(req.payload.id).populate('usuario');
-
+    const cliente = await Cliente.findOne({usuario: req.payload.id}).populate('usuario');
+    if(!cliente) return res.send({ error: "Cliente não existe." })
     if(nome) {
       cliente.usuario.nome = nome;
       cliente.nome = nome;
@@ -131,6 +131,11 @@ class ClienteController{
     if(dataDeNascimento) cliente.dataDeNascimento = dataDeNascimento;
 
     await cliente.save();
+    cliente.usuario = {
+      email: cliente.usuario.email,
+      _id: cliente.usuario._id,
+      permissao: cliente.usuario.permissao
+    }
     return res.send({ cliente });
   } catch(e){
     next(e)
