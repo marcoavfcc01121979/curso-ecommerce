@@ -58,13 +58,18 @@ const ProdutoValidation = {
       loja: Joi.string().alphanum().length(24).required(),
       limit: Joi.number(),
       offset: Joi.number(),
-      sortType: Joi.string()
+      sortType: Joi.string() 
     },
     params: {
       search: Joi.string().required()
     }
   },
   show: {
+    params: {
+      id: Joi.string().alphanum().length(24).required(),
+    }
+  },
+  showAvaliacoes: {
     params: {
       id: Joi.string().alphanum().length(24).required(),
     }
