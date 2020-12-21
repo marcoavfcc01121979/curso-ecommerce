@@ -47,9 +47,9 @@ class VariacaoController{
     }
   }
 
-  // PUT / - update
+  // PUT /:id - update
   async update(req, res, next) {
-    const { codigo,disponibilidade ,nome, preco, promocao, entrega, quantidade } = req.body;
+    const { codigo,fotos ,nome, preco, promocao, entrega, quantidade } = req.body;
     const { loja, produto } = req.query;
     const { id: _id } = req.params;
     try {
@@ -57,12 +57,12 @@ class VariacaoController{
       if(!variacao) return res.status(400).send({ error: "Variacao não encontada" });
 
       if( codigo ) variacao.codigo = codigo;
-      if( disponibilidade !== undefined ) variacao.disponibilidade = disponibilidade;
       if( nome ) variacao.nome = nome;
       if( preco ) variacao.preco = preco;
       if( promocao ) variacao.promocao = promocao;
       if( entrega ) variacao.entrega = entrega;
       if( quantidade ) variacao.quantidade = quantidade;
+      if( fotos ) variacao.fotos = fotos;
 
       await variacao.save();
       return res.send({ variacao });
