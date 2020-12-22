@@ -6,3 +6,4 @@ require('./categoria');
 require('./produto');
 require('./avaliacao');
 require('./variacao');
+require('./pedido');
