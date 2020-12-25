@@ -18,8 +18,6 @@ router.delete("/admin/:id", auth.required, LojaValidation.admin,Validation(Pedid
 // -- CARRINHO
 router.get("/admin/:id/carrinho", auth.required, LojaValidation.admin,Validation(PedidoValidation.showCarrinhoPedidosAdmin) , pedidoController.showCarrinhoPedidosAdmin)
 
-// -- ENTREGA
-
 // -- PAGAMENTO
 
 
@@ -32,8 +30,6 @@ router.delete("/:id", auth.required, Validation(PedidoValidation.remove) , pedid
 
 // -- CARRINHO
 router.get("/:id/carrinho", auth.required, Validation(PedidoValidation.showCarrinhoPedido) , pedidoController.showCarrinhoPedido);
-
-// -- ENTREGA
 
 // -- PAGAMENTO
 
