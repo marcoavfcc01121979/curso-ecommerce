@@ -4,6 +4,7 @@ const Correios = require('node-correios'),
   { calcBox } = require('../../helpers/calcBox');
 
 const calcularFrete = async ({ cep, produtos }) => {
+  
   const _produtos = produtos.map(item => ({
     pesoKg: item.variacao.entrega.pesoKg,
     profundidadeCm: item.variacao.entrega.dimensoes.profundidadeCm,

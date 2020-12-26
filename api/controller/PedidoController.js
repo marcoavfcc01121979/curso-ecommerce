@@ -161,10 +161,10 @@ class PedidoController {
         .send({ error: "Carrinho inválido" });
 
       const cliente = await Cliente.findOne({ usuario: req.payload.id });
-
+  
       // CHEGAR DADOS DA ENTREGA
-      if(!await EntregaValidation.checarValorPrazo(cliente.endereco.CEP, carrinho, entrega)) return res.status(422)
-        .send({ error: "Dados da entrega estão invalidos." });
+      if(!await EntregaValidation.checarValorPrazo(cliente.endereco.CEP, carrinho, entrega)) 
+        return res.status(422).send({ error: "Dados da entrega estão invalidos." });
 
       // CHEGAR DADOS DO PAGAMENTO
       //if(!PagamentoValidation(carrinho, pagamento)) return res.status(422)
