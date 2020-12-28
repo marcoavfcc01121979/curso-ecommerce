@@ -1522,7 +1522,7 @@ node-correios@^3.0.2:
     request "^2.67.0"
     soap "^0.29.0"
 
-node-expat@^2.3.15:
+node-expat@^2.3.15, node-expat@^2.3.18:
   version "2.3.18"
   resolved "https://registry.yarnpkg.com/node-expat/-/node-expat-2.3.18.tgz#d9e6949cecda15e131f14259b73dc7b9ed7bc560"
   integrity sha512-9dIrDxXePa9HSn+hhlAg1wXkvqOjxefEbMclGxk2cEnq/Y3U7Qo5HNNqeo3fQ4bVmLhcdt3YN1TZy7WMZy4MHw==
@@ -2287,6 +2287,15 @@ xml2json@^0.11.0:
     hoek "^4.2.1"
     joi "^13.1.2"
     node-expat "^2.3.15"
+
+xml2json@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/xml2json/-/xml2json-0.12.0.tgz#b2ae450b267033b76d896f86e022fa7bff678572"
+  integrity sha512-EPJHRWJnJUYbJlzR4pBhZODwWdi2IaYGtDdteJi0JpZ4OD31IplWALuit8r73dJuM4iHZdDVKY1tLqY2UICejg==
+  dependencies:
+    hoek "^4.2.1"
+    joi "^13.1.2"
+    node-expat "^2.3.18"
 
 xmlbuilder@~11.0.0:
   version "11.0.1"

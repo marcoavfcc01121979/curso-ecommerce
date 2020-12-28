@@ -40,7 +40,7 @@ const EntregaValidation = {
   }
 };
 
-/*const checarValorPrazo = async (cep, carrinho, entrega) => {
+const checarValorPrazo = async (cep, carrinho, entrega) => {
   try{
     const _carrinho = await Promise.all(carrinho.map(async (item) => {
       item.produto = await Produto.findById(item.produto);
@@ -61,8 +61,8 @@ const EntregaValidation = {
     console.log(e);
     return false;
   }
-};*/
-
+};
+/*
 const checarValorPrazo = async (cep, carrinho, entrega) => {
   try {
       const _carrinho = await Promise.all(carrinho.map(async (item) => {
@@ -85,5 +85,5 @@ const checarValorPrazo = async (cep, carrinho, entrega) => {
       return false;
   }
 }; 
-
+*/
 module.exports = { EntregaValidation, checarValorPrazo };
