@@ -9,7 +9,8 @@ const Entrega = mongoose.model("Entrega");
 const Cliente = mongoose.model("Cliente");
 const RegistroPedido = mongoose.model("RegistroPedido");
 
-const { calcularFrete } = require('./integracoes/correios')
+const { calcularFrete } = require('./integracoes/correios');
+const PagamentoValidation = require('./validacoes/pagamentoValidation');
 const EntregaValidation = require('./validacoes/entregaValidation');
 
 const CarrinhoValidation = require('./validacoes/carrinhoValidation');
@@ -166,8 +167,11 @@ class PedidoController {
       if(!await EntregaValidation.checarValorPrazo(cliente.endereco.CEP, carrinho, entrega)) return res.status(422).send({ error: "Dados da entrega estão invalidos." });
 
       // CHEGAR DADOS DO PAGAMENTO
-      //if(!PagamentoValidation(carrinho, pagamento)) return res.status(422)
-      //  .send({ error: "Dados do pagamento estão inválidos." });
+      if(!await PagamentoValidation.checarValorTotal({ carrinho, entrega, pagamento })) return res.status(422)
+        .send({ error: "Dados de pagamento Inválidos." });
+
+        if(! PagamentoValidation.checarCartao(pagamento)) return res.status(422)
+        .send({ error: "Dados de pagamento com cartão Inválidos." });
       
       const novoPagamento = new Pagamento({
         valor: pagamento.valor,
