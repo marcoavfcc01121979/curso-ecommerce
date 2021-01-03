@@ -162,7 +162,7 @@ class PedidoController {
       if(!await CarrinhoValidation(carrinho)) return res.status(422)
         .send({ error: "Carrinho inválido" });
 
-      const cliente = await Cliente.findOne({ usuario: req.payload.id }).populate("usuario");
+      const cliente = await Cliente.findOne({ usuario: req.payload.id }).populate({ path: "usuario", "select": "_id nome email" });
       console.log(cliente)
 
       // CHEGAR DADOS DA ENTREGA
