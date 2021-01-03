@@ -24,7 +24,7 @@ const PagamentoSchema = Schema({
       nomeCompleto: { type: String, required: true },
       codigoArea: { type: String, required: true },
       telefone: { type: String, required: true },
-      dataDeNascimento: { type: String, required: true },
+      dataNascimento: { type: String, required: true },
       credit_card_token: { type: String, required: true },
       cpf: { type: String, required: true }
     }

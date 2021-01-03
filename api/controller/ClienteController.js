@@ -11,6 +11,7 @@ const Usuario = mongoose.model('Usuario');
  * Admin
  */
 
+ 
 class ClienteController{
   // GET /index
   async index(req, res, next) {
@@ -130,10 +131,11 @@ class ClienteController{
  */
 
  // GET /:id
+ 
  async show(req, res, next) {
    try{
-    const clientes = await Cliente.findOne({ usuario: req.payload.id, loja: req.query.loja }).populate({path: 'usuario', select: "-salt -hash"});
-    return res.send({ clientes });
+    const cliente = await Cliente.findOne({ usuario: req.payload.id, loja: req.query.loja }).populate({ path: "usuario" , select: "-salt -hash" });
+    return res.send({ cliente });
    } catch(e) {
      next(e)
    }

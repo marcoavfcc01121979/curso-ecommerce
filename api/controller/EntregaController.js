@@ -19,7 +19,7 @@ class EntregaController {
     }
   }
 
-  // PUT /:id
+    // PUT /:id
   async update(req, res, next) {
     const { status, codigoRastreamento } = req.body;
     const { loja } = req.query;
@@ -55,6 +55,7 @@ class EntregaController {
         return item;
       }));
       const resultados = await calcularFrete({ cep, produtos: _carrinho });
+      console.log(resultados)
       return res.send({ resultados });
     }catch(e){
       next(e)

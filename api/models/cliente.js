@@ -8,7 +8,9 @@ const ClienteSchema = Schema({
   nome: { type: String, required: true },
   dataDeNascimento: { type: Date, required: true },
   cpf: { type: String, required: true },
-  telefones: { type: [{ type: String }] },
+  telefones: { 
+    type: [{ type: String }] 
+  },
   deletado: { type: Boolean, default: false },
   loja: { type: Schema.Types.ObjectId, ref: "Loja", required: true },
   endereco: {

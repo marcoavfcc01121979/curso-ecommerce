@@ -47,7 +47,7 @@ const checarValorTotal = async ({ carrinho, entrega, pagamento }) => {
     let valorTotal = entrega.custo;
     valorTotal += _carrinho.reduce((all, item) => all + (item.quantidade * item.precoUnitario) ,0)
     return(
-      valorTotal.toFixed() === pagamento.valor.toFixed() &&
+      valorTotal.toFixed(2) === pagamento.valor.toFixed(2) &&
       ( !pagamento.parcelas || pagamento.parcelas <= 6 )
     )
   }catch(e) {
@@ -62,7 +62,7 @@ const checarCartao = (pagamento) => {
       pagamento.cartao.nomeCompleto && typeof pagamento.cartao.nomeCompleto === 'string' &&
       pagamento.cartao.codigoArea && typeof pagamento.cartao.codigoArea === 'string' &&
       pagamento.cartao.telefone && typeof pagamento.cartao.telefone === 'string' &&
-      pagamento.cartao.dataDeNascimento && typeof pagamento.cartao.dataDeNascimento === 'string' &&
+      pagamento.cartao.dataNascimento && typeof pagamento.cartao.dataNascimento === 'string' &&
       pagamento.cartao.credit_card_token && typeof pagamento.cartao.credit_card_token === 'string' &&
       pagamento.cartao.cpf && typeof pagamento.cartao.cpf === 'string'
     );
