@@ -20,7 +20,9 @@ class PagamentoController {
 
       if(situacao && 
         (
-          registros.length === 0 || 
+          registros.length === 0 ||
+          !registros[registros.length-1].payload ||
+          !registros[registros.length-1].payload.code || 
           registros[registros.length-1].payload.code !== situacao.code
         )) {
           const registroPedido = new RegistroPedido({
