@@ -16,6 +16,7 @@ const PagamentoValidation = require('./validacoes/pagamentoValidation');
 const EmailController  = require('./EmailController');
 
 const EntregaValidation = require('./validacoes/entregaValidation');
+const QuantidadeValidation = require('./validacoes/quantidadeValidation');
 
 const CarrinhoValidation = require('./validacoes/carrinhoValidation');
 
@@ -86,6 +87,8 @@ class PedidoController {
 
 
       await pedido.save();
+
+      await QuantidadeValidation.atualizarQuantidade("cancelar_pedido", pedido);
 
       return res.send({ cancelado: true });
     }catch(e) {
@@ -172,7 +175,8 @@ class PedidoController {
         .send({ error: "Carrinho inválido" });
 
       const cliente = await Cliente.findOne({ usuario: req.payload.id }).populate({ path: "usuario", "select": "_id nome email" });
-      console.log(cliente)
+      
+      if(!await QuantidadeValidation.validarQuantidadeDisponivel(carrinho)) return res.status(400).send({ error: "Produto não tem quantidade disponivel." });
 
       // CHEGAR DADOS DA ENTREGA
       if(!await EntregaValidation.checarValorPrazo(cliente.endereco.CEP, carrinho, entrega)) return res.status(422).send({ error: "Dados da entrega estão invalidos." });
@@ -219,6 +223,8 @@ class PedidoController {
       await novoPagamento.save();
       await novaEntrega.save();
 
+      await QuantidadeValidation.atualizarQuantidade("salvar_pedido", pedido);
+
       const registroPedido = new RegistroPedido({
         pedido: pedido._id,
         tipo: "pedido",
@@ -263,6 +269,8 @@ class PedidoController {
       });
 
       await pedido.save();
+
+      await QuantidadeValidation.atualizarQuantidade("cancelar_pedido", pedido);
 
       return res.send({ cancelado: true });
     }catch(e) {
