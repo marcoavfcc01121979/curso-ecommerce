@@ -67,7 +67,7 @@ class PedidoController {
   // delete /admin/:id removeAdmin
   async removeAdmin(req, res, next) {
     try{
-      const pedido = await Pedido.findOne({ 
+      const pedido = await Pedido.findOne({  
         loja: req.query.loja, 
         _id: req.params.id 
       }).populate({ path: "cliente", populate: {path: "usuario"} });
@@ -112,7 +112,7 @@ class PedidoController {
   //CLIENTE
   // get / index
   async index(req, res, next) {
-    const { offset, limit, loja } = req.query;
+    const { offset, limit, loja } = req.query; 
 
     try{
       const cliente = await Cliente.findOne({ usuario: req.payload.id });

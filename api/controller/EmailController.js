@@ -1,5 +1,6 @@
 const transporter = require('nodemailer').createTransport(require('../config/email'));
 const { loja } = require('../config/index');
+const moment = require('moment');
 
 const _send = ({ subject, emails, message }, cb = null) => {
   const mailOptions = {
